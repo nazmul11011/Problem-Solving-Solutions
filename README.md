@@ -9,16 +9,16 @@ As a student studying Software Engineering at Shahjalal University of Science an
 ## Online Judges
 
 ### SPOJ (Sphere Online Judge)
-- [Profile Link](https://www.spoj.com/users/nazmul11011): Link to your SPOJ profile
+- [Profile Link](https://www.spoj.com/users/nazmul11011)
 
 ### LightOJ
-- [Profile Link](http://lightoj.com/volume_userstat.php?user_id=nazmul11011): Link to your LightOJ profile
+- [Profile Link](http://lightoj.com/volume_userstat.php?user_id=nazmul11011)
 
 ### Codeforces
-- [Profile Link](https://codeforces.com/profile/nazmul-sust): Link to your Codeforces profile
+- [Profile Link](https://codeforces.com/profile/nazmul-sust)
 
 ### UVA (UVa Online Judge)
-- [Profile Link](https://uhunt.onlinejudge.org/id/nazmul11011): Link to your UVa Online Judge profile
+- [Profile Link](https://uhunt.onlinejudge.org/id/nazmul11011)
 
 ## Structure
 
