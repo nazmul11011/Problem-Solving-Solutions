@@ -1,4 +1,4 @@
-# UVa Online Judge Solutions Repository
+# HACKERRANK Solutions Repository
 
 Welcome to my UVa Online Judge solutions repository! This repository contains my solutions to programming problems from UVa Online Judge.
 
