@@ -25,7 +25,7 @@ using namespace std;
 //     return solution[n][amount];
 // }
 
-int coinChangeWays(vector<int>& coins, int amount){
+unsigned int coinChangeWays(vector<int>& coins, int amount){
     vector<unsigned int> dp(amount + 1, 0);
     dp[0] = 1;
 
@@ -48,7 +48,7 @@ int main() {
     for (int i = 0; i < n; i++) {
         cin >> coins[i];
     }
-    int ways = coinChangeWays(coins, amount);
+    unsigned int ways = coinChangeWays(coins, amount);
     cout << "Number of ways to make change: " << ways << endl;
     return 0;
 }
