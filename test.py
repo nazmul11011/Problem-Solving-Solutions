@@ -1,63 +1,23 @@
 import requests
-import csv
-import json
-import re
 
-url = "http://103.84.159.55:9092/course-registrations/create"
+# Encrypted values assumed for now — replace after analyzing i.n()
+encrypted_phone = "VM1J3fgmpnfZiDe7NFnwPCJdGoMuMJtWEzQpQL2NP340cEmTnDAeemyvmWo7gLfzzhTknCICiAI7jtZ8qgTInEJKepqCj5PKWBpHJIyRYWYMWKb5+6xE6xufkCipBunYAsqRdqu03eKDqe/KrF4bO25zrK6PDw4XzWO1ZVhid1/2STqT9eVPmGFxRVy7/BL4IuBGwduJOOROyCnvMiyV4r0nQp/kx5pc2S17yQbM6G+VSSMt+638/WSQZfX2KXcYjXkf1AQH9vwpXgy11wcvoxbbs2KdwrpuoWVxXAI4wLC+ZcbGKy7NWeqM06H1z7u81UM7+I2/2r/2CdymLThFVg=="
+encrypted_password = "XKf9693Jv3yfeHJuv3bj6x4DNp4JyDVfoZAQMILGH5BP9uDPKesi6VR0gNK9y6pL5R7mlWGnamr087s6qfIgPF1g7AOSvYtZRiwahBgs1SHpaw39HcFUiHyo3JTO/qD1+qm31/JXVoPk2c/UZshsH1tNxE8I+SywDNk4Rqpw1gvMHPgfQdf5/IGO16wHeiY8h9xOr6CKIf+tCKJH59BzdMPrEt2Zpo40PcsIy47jiuSZJV4o7kHszq0RW5cZjsnPJD8YCOg0bkOZspWBxkUyMZHaVnpoLFkiSjHLErFJieLHtCF+k3cto++645z1ICXoG8bkPK62U4KVXfWjhbm6yQ=="
 
-headers = {
-    'Host': "103.84.159.55:9092",
-    'User-Agent': "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
-    'Accept': "text/x-component",
-    'Accept-Encoding': "gzip, deflate",
-    'Content-Type': "text/plain;charset=UTF-8",
-    'Next-Action': "6164afd79455923a14fe2c36e4512ab6e751c4aa",
-    'Next-Router-State-Tree': "%5B%22%22%2C%7B%22children%22%3A%5B%22(dashboard)%22%2C%7B%22children%22%3A%5B%22course-registrations%22%2C%7B%22children%22%3A%5B%22create%22%2C%7B%22children%22%3A%5B%22__PAGE__%22%2C%7B%7D%5D%7D%5D%7D%5D%7D%2Cnull%2Cnull%2Ctrue%5D%7D%2Cnull%2Cnull%2Ctrue%5D",
-    'Origin': "http://103.84.159.55:9092",
-    'Referer': "http://103.84.159.55:9092/course-registrations/create",
-    'Accept-Language': "en-US,en;q=0.9,bn;q=0.8",
-    'Cookie': "token="
+url = "https://mt.teletalk.com.bd/auth/app/user/login/"
+
+data = {
+    "phone_number": encrypted_phone,
+    # "otp": "otp",  # constant in this app
+    "password": encrypted_password
 }
 
-with open('students_info.csv', mode='w', newline='', encoding='utf-8') as file:
-    writer = csv.writer(file)
-    # Write header for student info
-    writer.writerow([
-        'Registration No', 'Name', 'Mobile', 'Email', 
-        'Session', 'Degree',
-        'Semester Code', 'Semester Name'
-    ])
+headers = {
+    "Content-Type": "application/x-www-form-urlencoded",
+    "User-Agent": "TeletalkCustomerApp/1.0"
+}
 
-    # Loop over registration numbers
-    for reg in range(2022831001, 2022831053):
-        payload = f'["{reg}"]'
-        try:
-            response = requests.post(url, data=payload, headers=headers)
-            response_text = response.text
-            match = re.search(r'1:(\{.*\})', response_text, re.DOTALL)
+response = requests.post(url, data=data, headers=headers)
 
-            if not match:
-                print(f"{reg}: No valid JSON found, skipping.")
-                continue
-
-            json_str = match.group(1)
-            json_data = json.loads(json_str)
-
-            student_info = json_data['data']['studentInfo']
-            semesters = json_data['data']['semesters']
-
-            for semester in semesters:
-                writer.writerow([
-                    student_info['registrationNo'],
-                    student_info['name'],
-                    student_info['mobile'],
-                    student_info['email'],
-                    student_info['session']['name'],
-                    student_info['degree']['name'],
-                    semester['code'],
-                    semester['name'],
-                ])
-
-            print(f"{reg}: Saved successfully.")
-        except Exception as e:
-            print(f"{reg}: Error occurred -> {e}")
+print("Status:", response.status_code)
+print("Body:", response.text)

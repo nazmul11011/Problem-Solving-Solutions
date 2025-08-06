@@ -3,19 +3,15 @@ using namespace std;
 #define ll long long
 
 ll knapsack(ll n, ll w, const vector<ll>& weights, const vector<ll>& values) {
-    vector<vector<ll>> solution(n + 1, vector<ll>(w + 1, 0));
+    vector<ll> dp(w + 1, 0);
 
-    for (ll i = 1; i <= n; i++) {
-        for (ll j = 0; j <= w; j++) {
-            if (weights[i - 1] <= j){
-                solution[i][j] = max(solution[i-1][j], values[i-1]+solution[i-1][j-weights[i-1]]);
-            }
-            else{
-                solution[i][j] = solution[i - 1][j];
-            }
+    for (ll i = 0; i < n; i++) {
+        for (ll j = w; j >= weights[i]; j--) {
+            dp[j] = max(dp[j], values[i] + dp[j - weights[i]]);
         }
     }
-    return solution[n][w];
+    
+    return dp[w];
 }
 
 int main() {
@@ -25,7 +21,10 @@ int main() {
     vector<ll> weights(n), values(n);
     // cout << "Enter weights: values: \n";
     for (ll i = 0; i < n; i++) {
-        cin >> weights[i] >> values[i];
+        cin >> weights[i] ;
+    }
+    for (ll i = 0; i < n; i++) {
+        cin >> values[i];
     }
     ll maxProfit = knapsack(n, w, weights, values);
     // cout << "Maximum value in Knapsack: " << maxProfit << endl;
