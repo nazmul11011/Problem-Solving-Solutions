@@ -22,7 +22,9 @@ int main() {
 
         for (int i = 1; i <= n; i++) {
             for (int j = 0; j <= K; j++) {
-                dp[i][j] = dp[i - 1][j]; 
+                
+                dp[i][j] = dp[i - 1][j];
+
                 for (int k = 1; k <= C[i - 1]; k++) {
                     int val = j - k * A[i - 1];
                     if (val < 0) break;

@@ -21,10 +21,7 @@ int main() {
     vector<ll> weights(n), values(n);
     // cout << "Enter weights: values: \n";
     for (ll i = 0; i < n; i++) {
-        cin >> weights[i] ;
-    }
-    for (ll i = 0; i < n; i++) {
-        cin >> values[i];
+        cin >> weights[i] >> values[i];
     }
     ll maxProfit = knapsack(n, w, weights, values);
     // cout << "Maximum value in Knapsack: " << maxProfit << endl;

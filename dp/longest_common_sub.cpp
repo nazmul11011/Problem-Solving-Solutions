@@ -7,7 +7,7 @@ string getLCS(string X, string Y) {
 
     // Fill DP table
     for(int i=1; i<=n; i++) {
-        for(int j=1; j<=m; j++) {
+        for(int j=1; j<=m; j++) { 
             if(X[i-1] == Y[j-1])
                 dp[i][j] = 1 + dp[i-1][j-1];
             else
