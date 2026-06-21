@@ -7,14 +7,15 @@ void UCS(vector<vector<pair<int,int>>> &adj, int start, int target) {
     int n = adj.size();
 
     vector<int> dist(n, INT_MAX);
-    dist[start] = 0;
-
+    
     priority_queue<pii, vector<pii>, greater<pii>> pq;
+
+    dist[start] = 0;
     pq.push({0, start});
 
     while(!pq.empty()) {
         auto[cost, u] = pq.top();
-        pq.top();
+        pq.pop();
 
         if(cost > dist[u]) continue;
         if(u == target){
@@ -46,6 +47,6 @@ int main() {
         // adj[v].push_back({u, w}); // remove if graph is directed
     }
 
-    int start = 0, target = 5;
-    UCS(adj, 0, n-1);
+    int start = 0, target = n-1;
+    UCS(adj, start, target);
 }
